@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Atlas de Medicina · UNA Puno</title>
+<meta name="description" content="Todos los atlas interactivos de Medicina UNA Puno en un solo lugar: Semiología, Patología especial, Inmunología, Anatomía y Memo Semiología.">
+<meta name="theme-color" content="#f5f6fa" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f1220" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f6fa;--card:#fff;--card-2:#eef0f6;--ink:#161a2b;--muted:#5d6479;--line:#dfe2ec;
+  --accent:#4b5bb8;--shadow:0 1px 2px rgba(20,24,50,.06),0 6px 20px rgba(20,24,50,.07);
+  --shadow-lg:0 12px 40px rgba(20,24,50,.16);--r:16px;--ease:cubic-bezier(.2,.8,.2,1);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f1220;--card:#181c2e;--card-2:#21263b;--ink:#eceefa;--muted:#a1a7c0;--line:#2c3150;
+  --accent:#8f9cf0;--shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.25);--shadow-lg:0 12px 40px rgba(0,0,0,.5);}}
+:root[data-theme="dark"]{
+  --bg:#0f1220;--card:#181c2e;--card-2:#21263b;--ink:#eceefa;--muted:#a1a7c0;--line:#2c3150;
+  --accent:#8f9cf0;--shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.25);--shadow-lg:0 12px 40px rgba(0,0,0,.5);}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Inter,system-ui,sans-serif}
+a{color:inherit}
+.envoltura{max-width:1180px;margin:0 auto;padding:0 16px 64px}
+header.hero{padding:28px 0 8px;display:flex;gap:16px;align-items:flex-start;justify-content:space-between}
+.hero h1{font-family:Fraunces,Georgia,serif;font-size:clamp(28px,6vw,44px);line-height:1.1;margin:0 0 6px;letter-spacing:-.01em}
+.hero p{margin:0;color:var(--muted);max-width:60ch}
+.tema{flex:none;width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:20px;cursor:pointer}
+.totales{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 4px}
+.totales span{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:14px;color:var(--muted)}
+.totales b{color:var(--ink)}
+h2{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:32px 0 12px;font-weight:600}
+/* tarjetas de curso */
+.cursos{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px}
+.curso{position:relative;display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;text-decoration:none;box-shadow:var(--shadow);transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
+.curso:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+.curso:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.portada{height:150px;display:grid;grid-template-columns:2fr 1fr;grid-template-rows:1fr 1fr;gap:2px;background:var(--c)}
+.portada img{width:100%;height:100%;object-fit:cover;display:block}
+.portada img:first-child{grid-row:1/3}
+.portada.sola{display:block}
+.portada.vacia{display:grid;place-items:center;grid-template-columns:1fr;font-size:64px;background:linear-gradient(135deg,var(--c),color-mix(in srgb,var(--c) 55%,#000))}
+.curso .cuerpo{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
+.curso .tipo{font-size:12px;font-weight:600;color:var(--c);text-transform:uppercase;letter-spacing:.06em}
+:root[data-theme="dark"] .curso .tipo{filter:brightness(1.6)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .curso .tipo{filter:brightness(1.6)}}
+.curso h3{margin:0;font-size:20px;line-height:1.2}
+.curso p{margin:0;color:var(--muted);font-size:14px}
+.curso .pie{margin-top:auto;padding-top:8px;display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--muted)}
+.curso .ir{font-weight:600;color:var(--ink)}
+/* buscador */
+.buscar{position:sticky;top:0;z-index:5;background:var(--bg);padding:12px 0 10px;margin-top:8px}
+.caja{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:0 14px;box-shadow:var(--shadow)}
+.caja:focus-within{border-color:var(--accent)}
+.caja input{flex:1;border:0;background:transparent;color:var(--ink);font:inherit;font-size:16px;padding:13px 0;outline:none;min-width:0}
+.caja button{border:0;background:none;color:var(--muted);font-size:18px;cursor:pointer;width:32px;height:32px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:10px 0 2px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:8px 14px;font:inherit;font-size:14px;cursor:pointer;min-height:40px}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.estado{color:var(--muted);font-size:14px;margin:6px 0 0}
+/* láminas */
+.bloque h3{display:flex;align-items:center;gap:8px;font-size:18px;margin:28px 0 12px}
+.bloque h3 a{margin-left:auto;font-size:14px;font-weight:500;color:var(--muted)}
+.grupo{font-size:13px;color:var(--muted);margin:16px 0 8px;font-weight:600}
+.laminas{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.lam{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;text-decoration:none;transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+.lam:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.lam:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.lam img{width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;background:var(--card-2);display:block}
+.lam .tx{padding:10px 12px 12px;display:flex;flex-direction:column;gap:3px}
+.lam .et{font-size:12px;color:var(--muted);display:flex;gap:6px;align-items:center}
+.lam .et i{font-style:normal;width:8px;height:8px;border-radius:50%;background:var(--c);flex:none}
+.lam b{font-size:15px;line-height:1.25}
+.lam small{color:var(--muted);font-size:13px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+mark{background:color-mix(in srgb,var(--accent) 28%,transparent);color:inherit;border-radius:3px;padding:0 1px}
+.vacio{text-align:center;padding:40px 16px;color:var(--muted)}
+.vacio div{font-size:44px}
+.reciente{display:none;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 12px;text-decoration:none;margin-top:16px;box-shadow:var(--shadow)}
+.reciente.si{display:flex}
+.reciente img{width:72px;height:48px;object-fit:cover;border-radius:8px;flex:none}
+.reciente span{font-size:12px;color:var(--muted);display:block}
+footer{margin-top:48px;color:var(--muted);font-size:13px;text-align:center}
+@media (max-width:760px){.portada{height:130px}.laminas{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.lam small{display:none}.lam b{font-size:14px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="envoltura">
+  <header class="hero">
+    <div>
+      <h1>Atlas de Medicina<br>UNA Puno</h1>
+      <p>Todos los atlas interactivos en un solo lugar. Elige un curso o busca una lámina por su tema.</p>
+    </div>
+    <button class="tema" id="tema" aria-label="Cambiar tema claro u oscuro">🌓</button>
+  </header>
+  <div class="totales" id="totales"></div>
+  <a class="reciente" id="reciente"></a>
+
+  <h2>Cursos</h2>
+  <div class="cursos" id="cursos"></div>
+
+  <h2 id="t-laminas">Todas las láminas</h2>
+  <div class="buscar">
+    <label class="caja">
+      <span aria-hidden="true">🔎</span>
+      <input id="q" type="search" placeholder="Buscar: soplos, complemento, necrosis…" autocomplete="off" aria-label="Buscar lámina">
+      <button id="limpiar" type="button" aria-label="Borrar búsqueda" hidden>✕</button>
+    </label>
+    <div class="chips" id="chips" role="group" aria-label="Filtrar por curso"></div>
+    <p class="estado" id="estado" aria-live="polite"></p>
+  </div>
+  <div id="lista"></div>
+
+  <footer>Hecho para estudiar Medicina en la UNA Puno · cada lámina abre su atlas original</footer>
+</div>
+<script src="datos.js"></script>
+<script>
+(() => {
+  const P = window.PORTAL, $ = s => document.querySelector(s);
+  const guardar = (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} };
+  const leer = k => { try { return localStorage.getItem(k); } catch (e) { return null; } };
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const norm = s => String(s).normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+
+  // tema
+  const t = leer("portal-tema"); if (t) document.documentElement.dataset.theme = t;
+  $("#tema").onclick = () => {
+    const osc = matchMedia("(prefers-color-scheme: dark)").matches;
+    const actual = document.documentElement.dataset.theme || (osc ? "dark" : "light");
+    const nuevo = actual === "dark" ? "light" : "dark";
+    document.documentElement.dataset.theme = nuevo; guardar("portal-tema", nuevo);
+  };
+
+  // todas las láminas en una lista plana
+  const todas = [];
+  P.atlas.forEach(a => a.laminas.forEach(l => todas.push({ ...l, a, url: a.url + "#/l/" + l.n,
+    clave: norm([l.t, l.s, l.g, a.curso].join(" ")) })));
+  const nLam = todas.length, nPreg = P.atlas.reduce((s, a) => s + a.preguntas, 0);
+  $("#totales").innerHTML = `<span><b>${P.atlas.length + P.extras.length}</b> webs</span>` +
+    `<span><b>${nLam}</b> láminas</span><span><b>${nPreg.toLocaleString("es")}</b> preguntas</span>`;
+
+  // tarjetas de curso
+  const tarjeta = (c, cuerpo, portada) => `<a class="curso" href="${c.url}" style="--c:${c.color}" data-curso="${c.id}">${portada}
+    <div class="cuerpo">${cuerpo}</div></a>`;
+  $("#cursos").innerHTML = P.atlas.map(a => {
+    const fotos = [0, 1, 2].map(i => a.laminas[Math.floor(i * a.laminas.length / 3)]).filter(Boolean);
+    return tarjeta(a, `<span class="tipo">Atlas · ${a.icono} ${esc(a.curso)}</span><h3>${esc(a.titulo)}</h3>
+      <p>${esc(a.marca)}</p><div class="pie"><span>${a.laminas.length} láminas · ${a.preguntas} preguntas</span><span class="ir">Abrir →</span></div>`,
+      `<div class="portada">${fotos.map(l => `<img src="${l.m}" alt="" loading="lazy">`).join("")}</div>`);
+  }).join("") + P.extras.map(e => tarjeta(e, `<span class="tipo">${e.tipo} · ${e.icono} ${esc(e.curso)}</span>
+      <h3>${esc(e.curso)}</h3><p>${esc(e.desc)}</p><div class="pie"><span>Web aparte</span><span class="ir">Abrir →</span></div>`,
+    e.portada ? `<div class="portada sola"><img src="${e.portada}" alt="" loading="lazy"></div>` : `<div class="portada vacia" aria-hidden="true">${e.icono}</div>`)).join("");
+
+  // chips de curso
+  let filtro = leer("portal-filtro") || "";
+  if (filtro && !P.atlas.some(a => a.id === filtro)) filtro = "";
+  const pintarChips = () => $("#chips").innerHTML =
+    [{ id: "", curso: "Todos", icono: "📚" }, ...P.atlas].map(a =>
+      `<button class="chip" data-f="${a.id}" aria-pressed="${a.id === filtro}">${a.icono} ${esc(a.curso)}</button>`).join("");
+  $("#chips").onclick = e => { const b = e.target.closest("[data-f]"); if (!b) return;
+    filtro = b.dataset.f; guardar("portal-filtro", filtro); pintarChips(); pintar(); };
+
+  const resaltar = (txt, palabras) => {
+    let h = esc(txt); if (!palabras.length) return h;
+    // resalta sin importar tildes: busca en la versión normalizada y marca el mismo tramo
+    const n = norm(txt), marcas = [];
+    palabras.forEach(p => { let i = n.indexOf(p); while (i >= 0) { marcas.push([i, i + p.length]); i = n.indexOf(p, i + p.length); } });
+    if (!marcas.length) return h;
+    marcas.sort((x, y) => x[0] - y[0]);
+    let out = "", k = 0;
+    marcas.forEach(([i, j]) => { if (i < k) return; out += esc(txt.slice(k, i)) + "<mark>" + esc(txt.slice(i, j)) + "</mark>"; k = j; });
+    return out + esc(txt.slice(k));
+  };
+  const lamina = (l, pal) => `<a class="lam" href="${l.url}" style="--c:${l.a.color}" data-n="${l.n}" data-a="${l.a.id}">
+    <img src="${l.m}" alt="" loading="lazy">
+    <div class="tx"><span class="et"><i></i>${l.a.icono} ${esc(l.a.curso)} · ${l.n}</span>
+    <b>${resaltar(l.t, pal)}</b><small>${resaltar(l.s, pal)}</small></div></a>`;
+
+  function pintar() {
+    const q = norm($("#q").value.trim()), pal = q.split(/\s+/).filter(Boolean);
+    $("#limpiar").hidden = !q;
+    const lista = todas.filter(l => (!filtro || l.a.id === filtro) && pal.every(p => l.clave.includes(p)));
+    $("#estado").textContent = pal.length ? `${lista.length} lámina${lista.length === 1 ? "" : "s"} encontrada${lista.length === 1 ? "" : "s"}` : "";
+    if (!lista.length) { $("#lista").innerHTML = `<div class="vacio"><div>🔍</div>No hay láminas con «${esc($("#q").value)}». Prueba otra palabra o quita el filtro.</div>`; return; }
+    if (pal.length) { $("#lista").innerHTML = `<div class="laminas">${lista.map(l => lamina(l, pal)).join("")}</div>`; return; }
+    // sin búsqueda: por curso y, dentro, por grupo
+    $("#lista").innerHTML = P.atlas.filter(a => !filtro || a.id === filtro).map(a => {
+      const grupos = [];
+      lista.filter(l => l.a === a).forEach(l => { let g = grupos.find(x => x.n === l.g); if (!g) grupos.push(g = { n: l.g, i: l.gi, ls: [] }); g.ls.push(l); });
+      return `<section class="bloque"><h3>${a.icono} ${esc(a.curso)} <a href="${a.url}">Abrir atlas →</a></h3>` +
+        grupos.map(g => `${g.n ? `<div class="grupo">${g.i} ${esc(g.n)}</div>` : ""}<div class="laminas">${g.ls.map(l => lamina(l, [])).join("")}</div>`).join("") + "</section>";
+    }).join("");
+  }
+  let reloj; $("#q").oninput = () => { clearTimeout(reloj); reloj = setTimeout(pintar, 120); };
+  $("#limpiar").onclick = () => { $("#q").value = ""; pintar(); $("#q").focus(); };
+
+  // recordar la última lámina abierta
+  document.addEventListener("click", e => { const a = e.target.closest(".lam"); if (a) guardar("portal-ultima", a.dataset.a + ":" + a.dataset.n); });
+  const u = (leer("portal-ultima") || "").split(":"), ul = todas.find(l => l.a.id === u[0] && String(l.n) === u[1]);
+  if (ul) { const r = $("#reciente"); r.href = ul.url; r.classList.add("si");
+    r.innerHTML = `<img src="${ul.m}" alt=""><div><span>Seguir donde te quedaste · ${ul.a.icono} ${esc(ul.a.curso)}</span><b>${esc(ul.t)}</b></div>`; }
+
+  pintarChips(); pintar();
+})();
+</script>
+</body>
+</html>
