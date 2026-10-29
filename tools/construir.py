@@ -13,6 +13,7 @@ ATLAS = [
     {"id": "semio", "repo": "atlas-semiologia-unap", "curso": "Semiología", "icono": "🩺", "color": "#1d6f8a"},
     {"id": "pato", "repo": "atlas-patologia-especial-unap", "curso": "Patología especial", "icono": "🔬", "color": "#9a3b5a"},
     {"id": "inmuno", "repo": "atlas-inmunologia-unap", "curso": "Inmunología", "icono": "🛡️", "color": "#4b5bb8"},
+    {"id": "fisio", "repo": "atlas-fisiopatologia-unap", "curso": "Fisiopatología", "icono": "⚗️", "color": "#2f7d5b"},
 ]
 EXTRAS = [
     {"id": "memo", "url": BASE + "memo-semiologia/", "curso": "Memo Semiología", "icono": "🧠", "color": "#7a4fd0",
